@@ -9,7 +9,7 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/Luxurioust/excelize"
+	"github.com/360EntSecGroup-Skylar/excelize"
 	_ "github.com/go-sql-driver/mysql"
 )
 
@@ -92,7 +92,8 @@ func sqlFetch(db *sql.DB, query string) (*[]map[string]string, *[]string) {
 }
 
 func excel(resultPointer *[]map[string]string, columnsPointer *[]string) {
-	xlsx := excelize.CreateFile()
+	//xlsx := excelize.CreateFile()
+	xlsx := excelize.NewFile()
 
 	//Set value of a cell.
 	result := *resultPointer
@@ -139,7 +140,7 @@ func excel(resultPointer *[]map[string]string, columnsPointer *[]string) {
 	// Set active sheet of the workbook.
 	xlsx.SetActiveSheet(2)
 	// Save xlsx file by the given path.
-	err := xlsx.WriteTo("workbook.xlsx")
+	err := xlsx.SaveAs("workbook.xlsx")
 	if err != nil {
 		fmt.Println(err)
 		os.Exit(1)
